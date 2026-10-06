@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 대시보드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="login-page" id="loginPage">
+      <div class="login-card">
+        <div class="brand-group">
+          <div class="brand-mark">A</div>
+          <div>
+            <p class="eyebrow">Admin Console</p>
+            <h1>관리자 로그인</h1>
+          </div>
+        </div>
+
+        <form id="loginForm" class="login-form">
+          <label>
+            <span>이메일</span>
+            <input type="email" value="admin@noriplay.com" placeholder="admin@noriplay.com" required />
+          </label>
+
+          <label>
+            <span>비밀번호</span>
+            <input type="password" value="admin1234" placeholder="비밀번호 입력" required />
+          </label>
+
+          <div class="login-options">
+            <label class="remember-me">
+              <input type="checkbox" checked />
+              <span>로그인 상태 유지</span>
+            </label>
+            <a href="#">비밀번호 찾기</a>
+          </div>
+
+          <button type="submit" class="primary-btn">로그인</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-box">A</div>
+          <div>
+            <p class="sidebar-subtitle">관리자 모드</p>
+            <h2>Admin Panel</h2>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <a class="nav-item active" href="#">
+            <span class="icon">⌂</span>
+            <span>대시보드</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="icon">◫</span>
+            <span>회원 관리</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="icon">◌</span>
+            <span>주문 관리</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="icon">▣</span>
+            <span>상품 관리</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="icon">▤</span>
+            <span>게시판</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="icon">⚙</span>
+            <span>설정</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="mini-card">
+            <p>이번 달 목표</p>
+            <strong>92.4%</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="mobile-menu" id="mobileMenu" aria-label="Toggle menu">☰</button>
+            <div class="page-title-wrap">
+              <p class="eyebrow">Overview</p>
+              <h3>대시보드</h3>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span>⌕</span>
+              <input type="text" placeholder="검색" />
+            </label>
+            <button class="icon-button" aria-label="Alerts">🔔</button>
+            <button class="icon-button" aria-label="Messages">✉</button>
+            <div class="profile-box">
+              <div class="avatar">SJ</div>
+              <div>
+                <strong>이수정</strong>
+                <small>관리자</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="stats-grid">
+          <article class="stat-card accent-blue">
+            <div class="stat-head">
+              <span>총 매출</span>
+              <span class="trend up">+12.4%</span>
+            </div>
+            <strong>₩ 12,480,200</strong>
+            <small>지난 30일 대비</small>
+          </article>
+
+          <article class="stat-card accent-purple">
+            <div class="stat-head">
+              <span>가입 회원</span>
+              <span class="trend up">+8.1%</span>
+            </div>
+            <strong>8,492</strong>
+            <small>누적 사용자</small>
+          </article>
+
+          <article class="stat-card accent-green">
+            <div class="stat-head">
+              <span>주문 수</span>
+              <span class="trend up">+5.8%</span>
+            </div>
+            <strong>3,210</strong>
+            <small>이번 달</small>
+          </article>
+
+          <article class="stat-card accent-orange">
+            <div class="stat-head">
+              <span>전환율</span>
+              <span class="trend down">-0.9%</span>
+            </div>
+            <strong>4.82%</strong>
+            <small>최근 업데이트</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel chart-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Performance</p>
+                <h4>매출 추이</h4>
+              </div>
+              <button class="ghost-btn">이번 달</button>
+            </div>
+            <canvas id="salesChart"></canvas>
+          </div>
+
+          <div class="panel mini-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Traffic</p>
+                <h4>유입 현황</h4>
+              </div>
+            </div>
+            <div class="ring-block">
+              <div class="ring-chart">
+                <span>72%</span>
+              </div>
+              <ul class="legend-list">
+                <li><i class="dot blue"></i> 신규 방문자</li>
+                <li><i class="dot purple"></i> 재방문</li>
+                <li><i class="dot green"></i> 구매 전환</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="panel table-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Management</p>
+                <h4>회원 리스트</h4>
+              </div>
+              <button class="ghost-btn">신규 추가</button>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>상태</th>
+                    <th>그룹</th>
+                    <th>매출</th>
+                    <th>작업</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>김민준</td>
+                    <td>minjun@demo.com</td>
+                    <td><span class="status active">활성</span></td>
+                    <td>VIP</td>
+                    <td>₩ 1,240,000</td>
+                    <td><button class="table-btn">보기</button></td>
+                  </tr>
+                  <tr>
+                    <td>이서연</td>
+                    <td>seoyeon@demo.com</td>
+                    <td><span class="status pending">대기</span></td>
+                    <td>기본</td>
+                    <td>₩ 520,000</td>
+                    <td><button class="table-btn">보기</button></td>
+                  </tr>
+                  <tr>
+                    <td>박지훈</td>
+                    <td>jihoon@demo.com</td>
+                    <td><span class="status inactive">휴면</span></td>
+                    <td>업체</td>
+                    <td>₩ 840,000</td>
+                    <td><button class="table-btn">보기</button></td>
+                  </tr>
+                  <tr>
+                    <td>정하은</td>
+                    <td>haeun@demo.com</td>
+                    <td><span class="status active">활성</span></td>
+                    <td>VIP</td>
+                    <td>₩ 2,140,000</td>
+                    <td><button class="table-btn">보기</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel activity-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Recent</p>
+                <h4>최근 활동</h4>
+              </div>
+            </div>
+
+            <ul class="activity-list">
+              <li>
+                <span class="activity-dot blue"></span>
+                <div>
+                  <strong>신규 회원 가입</strong>
+                  <small>2분 전</small>
+                </div>
+              </li>
+              <li>
+                <span class="activity-dot green"></span>
+                <div>
+                  <strong>주문 #1042 완료</strong>
+                  <small>15분 전</small>
+                </div>
+              </li>
+              <li>
+                <span class="activity-dot purple"></span>
+                <div>
+                  <strong>프로모션 배너 수정</strong>
+                  <small>1시간 전</small>
+                </div>
+              </li>
+              <li>
+                <span class="activity-dot orange"></span>
+                <div>
+                  <strong>결제 오류 신고 접수</strong>
+                  <small>3시간 전</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
